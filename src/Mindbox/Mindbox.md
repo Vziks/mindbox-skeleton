@@ -44,7 +44,6 @@ http://127.0.0.1:8000/mindbox
 
 ```
 
-
 ### How to use
 
 To add new method for work 
