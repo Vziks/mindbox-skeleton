@@ -1,0 +1,69 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+
+/.php_cs
+/.php_cs.cache
+
+.idea/
+
+docker-compose.override.yml
+
+/app/config/parameters.yml
+/build/
+/phpunit.xml
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+
+!/var/log
+/var/log/*
+!var/log/.gitkeep
+
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+
+/web/bundles/
+
+/.bundle/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/app/phpunit.xml
+
+/bin/*
+!bin/console
+!bin/symfony_requirements
+!bin/.gitkeep
+!bin/setup*
+
+/composer.phar
+
+/web/uploads/*
+!web/uploads/media/.gitkeep
+/web/robots.txt
+
+/log/
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
