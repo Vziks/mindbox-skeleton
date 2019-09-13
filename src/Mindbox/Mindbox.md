@@ -34,8 +34,9 @@ MINDBOX_ENDPOINTID=MindboxRu
 Inject to method 
 public function index(Request $request, MindBoxHandler $mindboxHandler, SerializerInterface $serializer)
 
-$operation = new CallbackOperation();
-$operation->setModel($model);
+$mindboxRequest = new MindboxRequest($model);
+
+$operation = new CallbackOperation($mindboxRequest);
 
 $result = $mindboxHandler->run($operation);
 
@@ -65,13 +66,15 @@ class PopupOperation extends AbstractOperation
 
 Default config method:
 ````
-Method : POST
-'Content-Type' => 'application/json',
-'Accept' => 'application/json',
+'Method' => 'POST'
+'Content-Type' => 'application/json'
+'Accept' => 'application/json'
+'SERIALIZATION_CONTEXT_JSON' => 'json'
 ````
-If need you can override any method by your context
+If need, you can override any method by your context
 
-Then add seriazation group to field
+Then add fields for serialization and set the group to these fields as well as the parameter in the getName () method
+@Serializer\Groups({"popup"})
 
 ````
 /**
@@ -79,7 +82,7 @@ Then add seriazation group to field
 * @Serializer\Type("App\Mindbox\Model\MindboxCustomer")
 * @Serializer\SerializedName("customer")
 * @Serializer\XmlElement(cdata=false)
-* @Serializer\Groups({"popup"})
+* @Serializer\Groups({"popup"})**
 * @Serializer\Expose()
 */
 private $customer;

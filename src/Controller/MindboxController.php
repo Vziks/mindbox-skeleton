@@ -8,6 +8,7 @@ use App\Mindbox\Form\CustomerType;
 use App\Mindbox\MindBoxHandler;
 use App\Mindbox\Model\MindboxArea;
 use App\Mindbox\Model\MindboxCustomer;
+use App\Mindbox\Model\MindboxRequest;
 use App\Mindbox\Model\MindboxSubscription;
 use App\Mindbox\Operations\CallbackOperation;
 use App\Mindbox\Operations\PopupOperation;
@@ -24,7 +25,7 @@ class MindboxController extends AbstractController
      * @Route("/mindbox", name="mindbox")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request, MindBoxHandler $mindboxHandler, SerializerInterface $serializer)
+    public function index(Request $request, MindBoxHandler $mindboxHandler)
     {
 
         $model = new MindboxCustomer();
@@ -54,28 +55,23 @@ class MindboxController extends AbstractController
 
             $model->setArea($mindboxArea);
 
-            $operation = new RegistartionOperation();
-            $operation->setModel($model);
+            $mindboxRequest = new MindboxRequest($model);
+
+            $operation = new RegistartionOperation($mindboxRequest);
 
             $result = $mindboxHandler->run($operation);
 
-            $operation = new WebSiteLoginOperation();
-            $operation->setModel($model);
+            $operation = new WebSiteLoginOperation($mindboxRequest);
 
             $result = $mindboxHandler->run($operation);
 
-
-            $operation = new CallbackOperation();
-            $operation->setModel($model);
+            $operation = new CallbackOperation($mindboxRequest);
 
             $result = $mindboxHandler->run($operation);
 
-
-            $operation = new PopupOperation();
-            $operation->setModel($model);
+            $operation = new PopupOperation($mindboxRequest);
 
             $result = $mindboxHandler->run($operation);
-
         }
 
 

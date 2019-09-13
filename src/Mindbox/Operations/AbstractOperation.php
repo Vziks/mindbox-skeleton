@@ -48,17 +48,19 @@ abstract class AbstractOperation
      */
     private $deviceUUID;
 
-    /**
-     * @var
+    /*
+     * @var MindboxRequest
      */
     private $model;
 
     /**
      * TraitOperation constructor.
+     * @param MindboxRequest $model
      * @param bool $isAsync
      */
-    public function __construct(bool $isAsync = false)
+    public function __construct(MindboxRequest $model, bool $isAsync = false)
     {
+        $this->model = $model;
         $this->isAsync = $isAsync;
     }
 
@@ -185,7 +187,7 @@ abstract class AbstractOperation
     public function getOptions(Serializer $serializer)
     {
         return ['body' => $serializer->serialize(
-            new MindboxRequest($this->getModel()),
+            $this->getModel(),
             $this->getSerializationContext(),
             SerializationContext::create()->setGroups($this->getName())
         )];
